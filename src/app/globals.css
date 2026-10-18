@@ -1,0 +1,213 @@
+@import "tailwindcss";
+@import "../../tokens.css";
+
+/* Hallmark · macrostructure: Ecosystem Index · genre: modern-minimal
+ * H2 split-diptych knobs: ratio=7/5, right=photo-stack, divider=negative-space
+ * F6 product-card-grid knobs: ratio=4/3 landscape, density=4-up, micro-action=Save
+ * theme: custom (tuned) · vibe: "site-poured concrete, safety amber, tropical daylight"
+ * paper: oklch(97% 0.008 75) · accent: oklch(78% 0.165 72)
+ * flag signals: blue oklch(39.6% .186 262) = trust · red oklch(54.1% .213 25) = urgency
+ *   · gold oklch(87.2% .176 93) = flag bar only (exact #0038A8 / #CE1126 / #FCD116)
+ * display: Archivo · body: Geist · axes: light / grotesk-sans / chromatic-amber ~72°
+ * nav: N12 banner+retract · footer: Ft5 statement · enrichment: photographic thumbnails
+ * motion: banner-retract · card-image-zoom · rail-snap (3 primitives)
+ * contrast: pass (40–41) · mobile: pass (34, 49, 50–57) · tokens: pass (48)
+ * studied: no · context: inferred
+ */
+
+@theme inline {
+  --color-paper: var(--bp-paper);
+  --color-paper-2: var(--bp-paper-2);
+  --color-paper-3: var(--bp-paper-3);
+  --color-ink: var(--bp-ink);
+  --color-ink-2: var(--bp-ink-2);
+  --color-muted: var(--bp-muted);
+  --color-rule: var(--bp-rule);
+  --color-rule-2: var(--bp-rule-2);
+  --color-accent: var(--bp-accent);
+  --color-accent-hover: var(--bp-accent-hover);
+  --color-accent-ink: var(--bp-accent-ink);
+  --color-accent-deep: var(--bp-accent-deep);
+  --color-focus: var(--bp-focus);
+  --color-flag-blue: var(--bp-flag-blue);
+  --color-flag-red: var(--bp-flag-red);
+  --color-flag-gold: var(--bp-flag-gold);
+  --color-flag-blue-on-ink: var(--bp-flag-blue-on-ink);
+  --color-flag-red-on-ink: var(--bp-flag-red-on-ink);
+  --color-ink-surface: var(--bp-ink-surface);
+  --color-ink-surface-2: var(--bp-ink-surface-2);
+  --color-ink-rule: var(--bp-ink-rule);
+  --color-on-ink: var(--bp-on-ink);
+  --color-on-ink-muted: var(--bp-on-ink-muted);
+
+  --font-display: var(--bp-font-display);
+  --font-body: var(--bp-font-body);
+  --font-mono: var(--bp-font-mono);
+
+  --radius-xs: var(--bp-radius-xs);
+  --radius-sm: var(--bp-radius-sm);
+  --radius-md: var(--bp-radius-md);
+  --radius-lg: var(--bp-radius-lg);
+
+  --ease-out: var(--bp-ease-out);
+  --ease-in: var(--bp-ease-in);
+  --ease-in-out: var(--bp-ease-in-out);
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bp-paper);
+  color: var(--bp-ink);
+  font-family: var(--bp-font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  font-synthesis-weight: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--bp-font-display);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* Numbers that sit in columns must align. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus is a first-class state — instant, never transitioned. */
+:focus-visible {
+  outline: var(--rule-thick) solid var(--bp-focus);
+  outline-offset: 2px;
+  border-radius: var(--bp-radius-xs);
+}
+
+::selection {
+  background: var(--bp-accent);
+  color: var(--bp-accent-ink);
+}
+
+/* The page shell */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Horizontal rails: snap, hide the scrollbar chrome, stay swipeable. */
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding-block-end: var(--space-2xs);
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail > * {
+  scroll-snap-align: start;
+}
+
+/* Bleed a rail to the viewport edge so cards run off-screen (Carousell does
+   this — it reads as "there is more", not as a truncated grid). */
+.rail-bleed {
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+}
+
+/* Clickable text is a one-line object. */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Controls carry the states a button needs beyond hover: pressed and disabled.
+   Focus-visible is handled globally above and is deliberately never animated. */
+.ctl:active {
+  transform: translateY(1px);
+}
+.ctl:disabled,
+.ctl[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Text inputs sit inside a bordered shell; the shell owns the focus ring so the
+   whole field reads as focused, not just the caret. */
+.field:focus-within {
+  outline: var(--rule-thick) solid var(--bp-focus);
+  outline-offset: 2px;
+}
+
+/* Step sequence descends across the row instead of sitting as three equal
+   columns. Only once there IS a row — on a phone they're already stacked. */
+@media (min-width: 48rem) {
+  .step-stagger > li:nth-child(2) {
+    margin-block-start: var(--space-lg);
+  }
+  .step-stagger > li:nth-child(3) {
+    margin-block-start: var(--space-2xl);
+  }
+}
+
+/* One orchestrated entrance, on first load only. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise var(--dur-long) var(--bp-ease-out) both;
+}
+
+/* The flag bar — blue, a gold seam, red. Used exactly twice on the page (under
+   the header, above the price band) so it reads as a mark, not a theme. */
+.flag-bar {
+  background-image: linear-gradient(
+    90deg,
+    var(--bp-flag-blue) 0 46%,
+    var(--bp-flag-gold) 46% 54%,
+    var(--bp-flag-red) 54% 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

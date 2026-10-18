@@ -1,0 +1,120 @@
+/* Hallmark · macrostructure: Ecosystem Index · genre: modern-minimal
+ * theme: custom (tuned) · vibe: "site-poured concrete, safety amber, tropical daylight"
+ * paper: oklch(97% 0.008 75) · accent: oklch(78% 0.165 72)
+ * display: Archivo · body: Geist · mono: Geist Mono
+ * axes: light / grotesk-sans / chromatic-amber ~72°
+ * nav: N12 banner+retract · footer: Ft5 statement · studied: no
+ *
+ * Portable token set for BuildRepublic. Raw values live here under the `bp-`
+ * namespace; globals.css re-exports them into Tailwind's `@theme` so the
+ * utilities (bg-paper, text-ink, font-display) resolve to these and nothing
+ * else. No colour or font literal appears anywhere outside this file.
+ */
+
+:root {
+  /* ---- Surfaces: warm near-white, tinted toward the amber anchor ---- */
+  --bp-paper: oklch(97% 0.008 75);
+  --bp-paper-2: oklch(94.5% 0.011 75);
+  --bp-paper-3: oklch(91.5% 0.013 75);
+
+  /* ---- Ink: warm near-black, the bitumen end of the scale ---- */
+  --bp-ink: oklch(20% 0.014 68);
+  --bp-ink-2: oklch(43% 0.013 68);
+  /* Muted is real caption text, not decoration — held dark enough to clear
+     WCAG 4.5:1 against paper-2, the lightest surface it ever sits on. */
+  --bp-muted: oklch(46% 0.012 68);
+
+  /* ---- Rules / dividers ---- */
+  --bp-rule: oklch(87% 0.010 75);
+  --bp-rule-2: oklch(92.5% 0.008 75);
+
+  /* ---- Accent: hi-vis safety amber. Ink reads on top of it. ---- */
+  --bp-accent: oklch(78% 0.165 72);
+  --bp-accent-hover: oklch(73% 0.170 70);
+  --bp-accent-ink: oklch(20% 0.014 68);
+  /* Deep amber — the accent at text-safe contrast on paper (4.5:1) */
+  --bp-accent-deep: oklch(46% 0.140 60);
+  /* Focus ring: accent hue, darkened to clear 3:1 against paper */
+  --bp-focus: oklch(52% 0.160 62);
+
+  /* ---- Philippine flag, used as signal not decoration ----
+     Exact flag values (#0038A8 / #CE1126 / #FCD116) converted to OKLCH.
+     Blue carries trust (verified, escrow), red carries urgency (rising price,
+     low stock), gold appears only in the flag bar. All three clear WCAG 4.5:1
+     against paper; the -on-ink variants clear it on the dark band. */
+  --bp-flag-blue: oklch(39.6% 0.186 262);
+  --bp-flag-red: oklch(54.1% 0.213 25);
+  --bp-flag-gold: oklch(87.2% 0.176 93);
+  --bp-flag-blue-on-ink: oklch(72% 0.150 250);
+  --bp-flag-red-on-ink: oklch(68% 0.190 27);
+
+  /* ---- Inverted band (price index, footer) ---- */
+  --bp-ink-surface: oklch(21.5% 0.016 68);
+  --bp-ink-surface-2: oklch(27% 0.016 68);
+  --bp-ink-rule: oklch(34% 0.014 68);
+  --bp-on-ink: oklch(95% 0.008 75);
+  --bp-on-ink-muted: oklch(70% 0.010 70);
+
+  /* ---- Type. The `--font-*-src` vars come from next/font in layout.tsx ---- */
+  --bp-font-display: var(--font-archivo-src), ui-sans-serif, system-ui, sans-serif;
+  --bp-font-body: var(--font-geist-src), ui-sans-serif, system-ui, sans-serif;
+  --bp-font-mono: var(--font-geist-mono-src), ui-monospace, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  --text-display-s: clamp(2.5rem, 1.7rem + 3.4vw, 4rem);
+  --text-display: clamp(3rem, 1.9rem + 4.8vw, 5.25rem);
+
+  /* ---- Space: 4 pt scale ---- */
+  --space-4xs: 0.125rem;
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 6.5rem;
+
+  /* ---- Radius: tight, engineered ---- */
+  --bp-radius-xs: 2px;
+  --bp-radius-sm: 4px;
+  --bp-radius-md: 8px;
+  --bp-radius-lg: 14px;
+
+  /* ---- Elevation shadows: tight and ink-tinted, never a coloured halo ---- */
+  --bp-shadow-plate: 0 8px 28px -12px oklch(20% 0.014 68 / 0.45);
+  --bp-shadow-chip: 0 6px 20px -10px oklch(20% 0.014 68 / 0.5);
+
+  /* ---- Rules ---- */
+  --rule-hair: 1px;
+  --rule-thick: 2px;
+
+  /* ---- Motion ---- */
+  --dur-instant: 90ms;
+  --dur-short: 160ms;
+  --dur-mid: 260ms;
+  --dur-long: 420ms;
+  --bp-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --bp-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --bp-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- Elevation: six-level named scale ---- */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-overlay: 40;
+  --z-modal: 50;
+
+  /* ---- Layout ---- */
+  --shell: 88rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}

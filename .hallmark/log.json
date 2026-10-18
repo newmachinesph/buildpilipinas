@@ -1,0 +1,15 @@
+[
+  {
+    "date": "2026-07-20",
+    "macrostructure": "Ecosystem Index",
+    "genre": "modern-minimal",
+    "theme": "custom",
+    "theme_axes": "light / grotesk-sans / chromatic-amber ~72",
+    "vibe": "site-poured concrete, safety amber, tropical daylight",
+    "nav": "N12 banner + retract",
+    "footer": "Ft5 statement",
+    "enrichment": "photographic thumbnails (hero photo stack, no generated art)",
+    "notes": "Rebranded BuildPilipinas -> BuildRepublic. Philippine flag colours added as semantic signals only (blue = verified/escrow, red = rising price / low stock / destructive, gold = the 3px flag bar, used twice). Amber stays the primary accent. Homepage made interactive: search, category + city dropdowns, sort, sortable price table, saved counter.",
+    "brief": "BuildRepublic - Philippine construction materials, tools and trades marketplace homepage"
+  }
+]
